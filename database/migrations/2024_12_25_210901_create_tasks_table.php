@@ -12,11 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tasks', function (Blueprint $table) {
-            $table->uuid('id')->primary(); // UUID as the primary key
-            $table->foreignId('user_id')->nullable()->constrained('users')->cascadeOnDelete(); // Foreign key referencing 'users' UUID
+            $table->uuid('id')->primary();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->string('title');
             $table->text('description')->nullable();
-            $table->string('status')->default('to_do');//, ['to_do', 'doing', 'done'] more flexable than enum
+            $table->date('due_date');
+            $table->enum('priority', ['high', 'medium', 'low']);
+            $table->enum('status', ['todo', 'doing', 'done'])->default('todo');
             $table->timestamps();
         });
     }

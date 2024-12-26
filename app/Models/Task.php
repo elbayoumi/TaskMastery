@@ -13,16 +13,17 @@ class Task extends Model
 
     // Fillable attributes
     protected $fillable = [
+        'user_id',
         'title',
         'description',
+        'due_date',
+        'priority',
         'status',
     ];
-
-   // Define the relationship with the User model (Many to One)
-   public function user()
-   {
-       return $this->belongsTo(User::class);
-   }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
     // Automatically generate UUID for new records
     protected static function boot()
     {

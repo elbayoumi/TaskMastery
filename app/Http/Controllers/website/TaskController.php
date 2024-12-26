@@ -3,72 +3,90 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
-use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
-    // عرض قائمة المهام
     public function index()
     {
-        $tasks = Task::all();
+        $tasks = Task::where('user_id', Auth::id())
+                     ->orderBy('due_date')
+                     ->get();
         return view('tasks.index', compact('tasks'));
     }
 
-    // عرض نموذج إضافة مهمة جديدة
     public function create()
     {
-        $users = User::all(); // لجلب جميع المستخدمين لاختيار المستخدم
-        return view('tasks.create', compact('users'));
+        return view('tasks.create');
     }
 
-    // تخزين مهمة جديدة
     public function store(Request $request)
     {
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'user_id' => 'required|exists:users,id', // التأكد من وجود المستخدم
+            'priority' => 'required|in:high,medium,low',
         ]);
+
+        // استخدم API للحصول على اقتراح الموعد النهائي
+        $dueDateSuggestion = null;
+
+        if ($request->description) {
+            $response = app(\OpenAI\Client::class)->completions()->create([
+                'model' => 'text-davinci-003',
+                'prompt' => "Suggest a due date for this task: {$request->description}",
+                'max_tokens' => 50,
+            ]);
+
+            $dueDateSuggestion = $response['choices'][0]['text'] ?? null;
+        }
+
+        // إذا لم يقم المستخدم بإدخال تاريخ، يتم استخدام الاقتراح
+        $dueDate = $request->due_date ?? $dueDateSuggestion;
 
         Task::create([
+            'user_id' => Auth::id(),
             'title' => $request->title,
             'description' => $request->description,
-            'user_id' => $request->user_id, // ربط المهمة بالمستخدم
+            'due_date' => $dueDate,
+            'priority' => $request->priority,
         ]);
 
-        return redirect()->route('tasks.index')->with('success', 'Task created successfully');
+        return redirect()->route('tasks.index')->with('success', 'Task created successfully with suggested due date!');
     }
 
-    // عرض نموذج تحرير مهمة
     public function edit(Task $task)
     {
-        $users = User::all();
-        return view('tasks.edit', compact('task', 'users'));
+        return view('tasks.edit', compact('task'));
     }
 
-    // تحديث مهمة موجودة
     public function update(Request $request, Task $task)
     {
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'user_id' => 'required|exists:users,id',
+            'due_date' => 'required|date',
+            'priority' => 'required|in:high,medium,low',
         ]);
 
-        $task->update([
-            'title' => $request->title,
-            'description' => $request->description,
-            'user_id' => $request->user_id,
-        ]);
-
-        return redirect()->route('tasks.index')->with('success', 'Task updated successfully');
+        $task->update($request->all());
+        return redirect()->route('tasks.index')->with('success', 'Task updated successfully!');
     }
 
-    // حذف مهمة
     public function destroy(Task $task)
     {
         $task->delete();
-        return redirect()->route('tasks.index')->with('success', 'Task deleted successfully');
+        return redirect()->route('tasks.index')->with('success', 'Task deleted successfully!');
+    }
+
+    public function updateStatus(Request $request, Task $task)
+    {
+        $request->validate([
+            'status' => 'required|in:todo,doing,done',
+        ]);
+
+        $task->update(['status' => $request->status]);
+        return redirect()->route('tasks.index')->with('success', 'Task status updated successfully!');
     }
 }
