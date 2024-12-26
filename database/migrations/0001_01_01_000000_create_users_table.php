@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Create 'users' table with UUID as the primary key
         Schema::create('users', function (Blueprint $table) {
-            $table->uuid('id')->primary(); // UUID as primary key
+            $table->id();
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
@@ -22,17 +21,15 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        // Create 'password_reset_tokens' table
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
             $table->string('token');
             $table->timestamp('created_at')->nullable();
         });
 
-        // Create 'sessions' table with UUID as the primary key
         Schema::create('sessions', function (Blueprint $table) {
-            $table->uuid('id')->primary(); // UUID as primary key
-            $table->foreignUuid('user_id')->nullable()->constrained('users')->cascadeOnDelete(); // Foreign key referencing 'users' UUID
+            $table->string('id')->primary();
+            $table->foreignId('user_id')->nullable()->index();
             $table->string('ip_address', 45)->nullable();
             $table->text('user_agent')->nullable();
             $table->longText('payload');

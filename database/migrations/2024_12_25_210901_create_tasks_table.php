@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->uuid('id')->primary(); // UUID as the primary key
-            $table->foreignUuid('user_id')->nullable()->constrained('users')->cascadeOnDelete(); // Foreign key referencing 'users' UUID
+            $table->foreignId('user_id')->nullable()->constrained('users')->cascadeOnDelete(); // Foreign key referencing 'users' UUID
             $table->string('title');
             $table->text('description')->nullable();
             $table->string('status')->default('to_do');//, ['to_do', 'doing', 'done'] more flexable than enum
