@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('title');
             $table->text('description')->nullable();
             $table->date('due_date');
-            $table->enum('priority', ['high', 'medium', 'low']);
-            $table->enum('status', ['todo', 'doing', 'done'])->default('todo');
+            $table->string('priority')->default('low'); // ['high', 'medium', 'low'] php enum more flexable
+            $table->string('status')->default('todo'); //['todo', 'doing', 'done']
             $table->timestamps();
         });
     }

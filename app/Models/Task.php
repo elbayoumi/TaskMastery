@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\TaskPriority;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
@@ -44,6 +45,7 @@ class Task extends Model
     protected $casts = [
         'title'=> 'string',
         'description'=> 'string',
+        'priority'=> TaskPriority::class,
         'status' => TaskStatus::class, // Cast status to Enum
         'created_at' => 'datetime',    // Ensure created_at is cast to a Carbon instance
         'updated_at' => 'datetime',    // Ensure updated_at is cast to a Carbon instance
