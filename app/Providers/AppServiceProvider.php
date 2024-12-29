@@ -1,6 +1,11 @@
 <?php
 
 namespace App\Providers;
+
+use App\Models\Task;
+use App\Models\TaskCategory;
+use App\Observers\TaskCategoryObserver;
+use App\Observers\TaskObserver;
 use OpenAI;
 use Illuminate\Support\ServiceProvider;
 
@@ -22,6 +27,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Task::observe(TaskObserver::class);
+        TaskCategory::observe(TaskCategoryObserver::class);
+
+
     }
 }

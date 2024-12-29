@@ -8,4 +8,16 @@ export default defineConfig({
             refresh: true,
         }),
     ],
+    build: {
+        rollupOptions: {
+            output: {
+                assetFileNames: (assetInfo) => {
+                    if (/\.(woff|woff2|ttf|eot|otf)$/.test(assetInfo.name)) {
+                        return 'fonts/[name][extname]';
+                    }
+                    return 'assets/[name][extname]';
+                },
+            },
+        },
+    },
 });

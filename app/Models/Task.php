@@ -25,17 +25,12 @@ class Task extends Model
     {
         return $this->belongsTo(User::class);
     }
-    // Automatically generate UUID for new records
-    protected static function boot()
-    {
-        parent::boot();
+    public function categories()
+{
+    return $this->belongsToMany(TaskCategory::class, 'task_category_task', 'task_id', 'category_id');
+}
 
-        static::creating(function ($model) {
-            if (empty($model->id)) {
-                $model->id = (string) Str::uuid();
-            }
-        });
-    }
+
 
     // Define the primary key as UUID
     protected $keyType = 'string';
