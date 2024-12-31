@@ -66,7 +66,7 @@
             const passwordField = document.getElementById('password');
             const type ='text' ;
             passwordField.type = type;
-            this.textContent = '🙈'
+
         });
 
         // زر عرض/إخفاء كلمة المرور
