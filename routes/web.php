@@ -40,5 +40,20 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+use Illuminate\Support\Facades\Mail;
+
+Route::get('/send-test-email', function () {
+    $details = [
+        'title' => 'Test Email from Laravel',
+        'body' => 'This is a test email sent from Laravel application using SMTP settings.'
+    ];
+
+    Mail::raw($details['body'], function ($message) use ($details) {
+        $message->to('atboo797@gmail.com') // ضع الإيميل المستلم هنا
+                ->subject($details['title']);
+    });
+
+    return 'Test email has been sent!';
+});
 
 require __DIR__.'/auth.php';
