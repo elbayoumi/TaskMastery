@@ -30,8 +30,6 @@
                         👁
                     </span>
                 </div>
-
-
             </div>
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
@@ -63,9 +61,8 @@
             passwordField.value = strongPassword;
             confirmPasswordField.value = strongPassword;
 
-            const type ='text' ;
-            passwordField.type = type;
-
+            // اجعل كلمة المرور مرئية بعد التوليد
+            passwordField.type = 'text';
         });
 
         // زر عرض/إخفاء كلمة المرور
