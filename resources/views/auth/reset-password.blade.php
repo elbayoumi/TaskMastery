@@ -20,14 +20,15 @@
 
                 <!-- أيقونة عرض/إخفاء كلمة المرور -->
                 <div class="absolute inset-y-0  flex right-10 ">
-                    <span id="toggle-password" class=" flex items-center cursor-pointer text-gray-500 text-lg">
+
+                    <!-- زر توليد كلمة مرور -->
+                    <button type="button" id="generate-password" class=" m-1 right-2 bg-blue-500 text-white text-xs px-2 py-1 rounded hover:bg-blue-600">
+                        Generate
+                    </button>
+                    <span id="toggle-password" class="m-1 flex items-center cursor-pointer text-gray-500 text-lg">
                         👁
                     </span>
 
-                    <!-- زر توليد كلمة مرور -->
-                    <button type="button" id="generate-password" class="  right-2 bg-blue-500 text-white text-xs px-2 py-1 rounded hover:bg-blue-600">
-                        Generate
-                    </button>
                 </div>
 
             </div>
