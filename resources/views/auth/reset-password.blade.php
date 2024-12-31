@@ -19,8 +19,8 @@
                 <x-text-input id="password" class="block mt-1 w-full pr-20" type="password" name="password" required autocomplete="new-password" />
 
                 <!-- أيقونة عرض/إخفاء كلمة المرور -->
-                <div class="absolute inset-y-0 ">
-                    <span id="toggle-password" class="  right-10 flex items-center cursor-pointer text-gray-500 text-lg">
+                <div class="absolute inset-y-0  flex right-10 ">
+                    <span id="toggle-password" class=" flex items-center cursor-pointer text-gray-500 text-lg">
                         👁
                     </span>
 
