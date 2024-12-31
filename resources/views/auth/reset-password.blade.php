@@ -19,9 +19,9 @@
                 <x-text-input id="password" class="block mt-1 w-full pr-20" type="password" name="password" required autocomplete="new-password" />
 
                 <!-- أيقونة عرض/إخفاء كلمة المرور -->
-                <button type="button" id="toggle-password" class="absolute inset-y-0 right-10 flex items-center text-gray-500">
+                <span id="toggle-password" class="absolute inset-y-0 right-10 flex items-center cursor-pointer text-gray-500 text-lg">
                     👁
-                </button>
+                </span>
 
                 <!-- زر توليد كلمة مرور -->
                 <button type="button" id="generate-password" class="absolute inset-y-0 right-2 bg-blue-500 text-white text-xs px-2 py-1 rounded hover:bg-blue-600">
