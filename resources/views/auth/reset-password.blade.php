@@ -16,10 +16,17 @@
         <div class="mt-4 relative">
             <x-input-label for="password" :value="__('Password')" />
             <div class="relative">
-                <x-text-input id="password" class="block mt-1 w-full pr-10" type="password" name="password" required autocomplete="new-password" />
-                <span id="toggle-password" class="absolute inset-y-0 right-2 flex items-center cursor-pointer">
+                <x-text-input id="password" class="block mt-1 w-full pr-16" type="password" name="password" required autocomplete="new-password" />
+
+                <!-- أيقونة عرض/إخفاء كلمة المرور -->
+                <span id="toggle-password" class="absolute inset-y-0 right-10 flex items-center cursor-pointer text-gray-500">
                     👁
                 </span>
+
+                <!-- زر توليد كلمة مرور -->
+                <button type="button" id="generate-password" class="absolute inset-y-0 right-2 bg-blue-500 text-white text-xs px-2 py-1 rounded hover:bg-blue-600">
+                    Generate
+                </button>
             </div>
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
@@ -41,6 +48,18 @@
     </form>
 
     <script>
+        // زر توليد كلمة مرور قوية
+        document.getElementById('generate-password').addEventListener('click', function () {
+            const passwordField = document.getElementById('password');
+            const confirmPasswordField = document.getElementById('password_confirmation');
+
+            // توليد كلمة مرور قوية
+            const strongPassword = generateStrongPassword();
+            passwordField.value = strongPassword;
+            confirmPasswordField.value = strongPassword;
+        });
+
+        // زر عرض/إخفاء كلمة المرور
         document.getElementById('toggle-password').addEventListener('click', function () {
             const passwordField = document.getElementById('password');
             const type = passwordField.type === 'password' ? 'text' : 'password';
@@ -49,5 +68,17 @@
             // تغيير الأيقونة
             this.textContent = type === 'password' ? '👁' : '🙈';
         });
+
+        // دالة لتوليد كلمة مرور قوية
+        function generateStrongPassword() {
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+';
+            const passwordLength = 12;
+            let password = '';
+            for (let i = 0; i < passwordLength; i++) {
+                const randomIndex = Math.floor(Math.random() * characters.length);
+                password += characters[randomIndex];
+            }
+            return password;
+        }
     </script>
 </x-guest-layout>
