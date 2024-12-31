@@ -63,7 +63,6 @@
             passwordField.value = strongPassword;
             confirmPasswordField.value = strongPassword;
 
-            const passwordField = document.getElementById('password');
             const type ='text' ;
             passwordField.type = type;
 
