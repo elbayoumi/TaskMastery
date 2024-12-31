@@ -63,6 +63,7 @@
 
             // اجعل كلمة المرور مرئية بعد التوليد
             passwordField.type = 'text';
+            document.getElementById('toggle-password').textContent='🙈';
         });
 
         // زر عرض/إخفاء كلمة المرور
