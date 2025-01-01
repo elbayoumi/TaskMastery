@@ -70,9 +70,12 @@
 
         // زر عرض/إخفاء كلمة المرور
         document.getElementById('toggle-password').addEventListener('click', function () {
+            const confirmPasswordField = document.getElementById('password_confirmation');
             const passwordField = document.getElementById('password');
             const type = passwordField.type === 'password' ? 'text' : 'password';
+
             passwordField.type = type;
+            confirmPasswordField.type = type;
 
             // تغيير الأيقونة
             this.textContent = type === 'password' ? '👁' : '🙈';
