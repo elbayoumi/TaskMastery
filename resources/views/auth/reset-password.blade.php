@@ -22,7 +22,7 @@
                 <div class="absolute inset-y-0 right-0 flex items-center space-x-2 pr-2">
                     <!-- زر توليد كلمة مرور -->
                     <button type="button" id="generate-password" class="password bg-blue-500 text-white text-xs px-2 py-1 rounded hover:bg-blue-600">
-                        Generate
+                        Generate 🛡️
                     </button>
 
                     <!-- أيقونة عرض/إخفاء كلمة المرور -->
@@ -45,7 +45,7 @@
 
         <div class="flex items-center justify-end mt-4">
             <x-primary-button>
-                {{ __('Reset Password') }}
+                {{ __('Reset Password') }} ♻️
             </x-primary-button>
         </div>
     </form>
