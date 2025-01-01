@@ -16,12 +16,12 @@
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')" />
             <div class="relative">
-                <x-text-input id="password" class="block mt-1 w-full pr-20" type="password" name="password" required autocomplete="new-password" />
+                <x-text-input id="password" class=" password block mt-1 w-full pr-20" type="password" name="password" required autocomplete="new-password" />
 
                 <!-- أيقونة عرض/إخفاء كلمة المرور -->
                 <div class="absolute inset-y-0 right-0 flex items-center space-x-2 pr-2">
                     <!-- زر توليد كلمة مرور -->
-                    <button type="button" id="generate-password" class="bg-blue-500 text-white text-xs px-2 py-1 rounded hover:bg-blue-600">
+                    <button type="button" id="generate-password" class="password bg-blue-500 text-white text-xs px-2 py-1 rounded hover:bg-blue-600">
                         Generate
                     </button>
 
@@ -54,6 +54,7 @@
         // زر توليد كلمة مرور قوية
         document.getElementById('generate-password').addEventListener('click', function () {
             const passwordField = document.getElementById('password');
+
             const confirmPasswordField = document.getElementById('password_confirmation');
 
             // توليد كلمة مرور قوية
@@ -63,6 +64,7 @@
 
             // اجعل كلمة المرور مرئية بعد التوليد
             passwordField.type = 'text';
+            confirmPasswordField.type = 'text';
             document.getElementById('toggle-password').textContent='🙈';
         });
 
