@@ -53,30 +53,45 @@
                 <div class="hidden w-full md:block md:w-auto" id="navbar-default">
                     <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                         <li>
-                            <a href="/" class="block py-2 px-3 {{ request()->is('/') ? 'text-blue-700' : 'text-gray-900 dark:text-white' }} rounded md:p-0">Home</a>
+                            <a href="/" class="block py-2 px-3 {{ request()->is('/') ? 'text-blue-700' : 'text-gray-900 dark:text-white' }} rounded md:p-0">
+                                🏠 Home
+                            </a>
                         </li>
                         <li>
-                            <a href="{{ route('about-us') }}" class="block py-2 px-3 {{ request()->is('about-us') ? 'text-blue-700' : 'text-gray-900 dark:text-white' }} rounded md:p-0">About Us</a>
+                            <a href="{{ route('about-us') }}" class="block py-2 px-3 {{ request()->is('about-us') ? 'text-blue-700' : 'text-gray-900 dark:text-white' }} rounded md:p-0">
+                                ℹ️ About Us
+                            </a>
                         </li>
                         <li>
-                            <a href="{{ route('services') }}" class="block py-2 px-3 {{ request()->is('services') ? 'text-blue-700' : 'text-gray-900 dark:text-white' }} rounded md:p-0">Services</a>
+                            <a href="{{ route('services') }}" class="block py-2 px-3 {{ request()->is('services') ? 'text-blue-700' : 'text-gray-900 dark:text-white' }} rounded md:p-0">
+                                💼 Services
+                            </a>
                         </li>
                         <li>
-                            <a href="{{ route('privacy-policy') }}" class="block py-2 px-3 {{ request()->is('privacy-policy') ? 'text-blue-700' : 'text-gray-900 dark:text-white' }} rounded md:p-0">Privacy Policy</a>
+                            <a href="{{ route('privacy-policy') }}" class="block py-2 px-3 {{ request()->is('privacy-policy') ? 'text-blue-700' : 'text-gray-900 dark:text-white' }} rounded md:p-0">
+                                🔒 Privacy Policy
+                            </a>
                         </li>
                         @auth
                         <li>
-                            <a href="{{ route('dashboard') }}" class="block py-2 px-3 {{ request()->is('dashboard') ? 'text-blue-700' : 'text-gray-900 dark:text-white' }} rounded md:p-0">Dashboard</a>
+                            <a href="{{ route('dashboard') }}" class="block py-2 px-3 {{ request()->is('dashboard') ? 'text-blue-700' : 'text-gray-900 dark:text-white' }} rounded md:p-0">
+                                📊 Dashboard
+                            </a>
                         </li>
                         @else
                         <li>
-                            <a href="{{ route('login') }}" class="block py-2 px-3 {{ request()->is('login') ? 'text-blue-700' : 'text-gray-900 dark:text-white' }} rounded md:p-0">Login</a>
+                            <a href="{{ route('login') }}" class="block py-2 px-3 {{ request()->is('login') ? 'text-blue-700' : 'text-gray-900 dark:text-white' }} rounded md:p-0">
+                                🔑 Login
+                            </a>
                         </li>
                         <li>
-                            <a href="{{ route('register') }}" class="block py-2 px-3 {{ request()->is('register') ? 'text-blue-700' : 'text-gray-900 dark:text-white' }} rounded md:p-0">Register</a>
+                            <a href="{{ route('register') }}" class="block py-2 px-3 {{ request()->is('register') ? 'text-blue-700' : 'text-gray-900 dark:text-white' }} rounded md:p-0">
+                                📝 Register
+                            </a>
                         </li>
                         @endauth
                     </ul>
+
                 </div>
             </div>
         </nav>
