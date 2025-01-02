@@ -75,11 +75,11 @@
             font-weight: bold;
         }
 
-        .chat-message .user {
+        .chat-message.user {
             color: #2b6cb0;
         }
 
-        .chat-message .ai {
+        .chat-message.ai {
             color: #2f855a;
         }
 
@@ -137,6 +137,43 @@
         #toggleChat:hover {
             background-color: #357ab8;
         }
+
+        #chatbox-loader {
+            display: none;
+            margin: 10px auto;
+            text-align: center;
+        }
+
+        #chatbox-loader span {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            margin: 0 3px;
+            background-color: #4a90e2;
+            border-radius: 50%;
+            animation: bounce 1.4s infinite ease-in-out both;
+        }
+
+        #chatbox-loader span:nth-child(1) {
+            animation-delay: -0.32s;
+        }
+
+        #chatbox-loader span:nth-child(2) {
+            animation-delay: -0.16s;
+        }
+
+        #chatbox-loader span:nth-child(3) {
+            animation-delay: 0s;
+        }
+
+        @keyframes bounce {
+            0%, 80%, 100% {
+                transform: scale(0);
+            }
+            40% {
+                transform: scale(1);
+            }
+        }
     </style>
 </head>
 
@@ -158,6 +195,11 @@
         <div id="chatMessages" class="dark">
             <!-- Messages will appear here -->
         </div>
+        <div id="chatbox-loader">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
         <div id="chatInputContainer">
             <input id="chatInput" type="text" placeholder="Type your message..." class="dark">
             <button id="sendChat">Send</button>
@@ -175,6 +217,7 @@
             const sendChat = document.getElementById('sendChat');
             const toggleChat = document.getElementById('toggleChat');
             const closeChat = document.getElementById('closeChat');
+            const loader = document.getElementById('chatbox-loader');
 
             // Toggle Chatbox Visibility
             toggleChat.addEventListener('click', () => {
@@ -184,8 +227,8 @@
             closeChat.addEventListener('click', () => {
                 chatbox.style.display = 'none';
             });
+
             async function sendMessage() {
-                {
                 const userMessage = chatInput.value.trim();
                 if (!userMessage) return;
 
@@ -194,38 +237,43 @@
 
                 chatInput.value = '';
 
+                // Show loader
+                loader.style.display = 'block';
+
                 try {
                     const response = await fetch('{{ route('generate-content') }}', {
                         method: 'POST',
                         headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                    },
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        },
                         body: JSON.stringify({ text: userMessage }),
                     });
 
                     const result = await response.json();
 
                     if (result.success) {
-
                         appendMessage('ai', result.data.candidates[0].content.parts[0].text);
                     } else {
                         appendMessage('system', 'Failed to get response from AI.');
                     }
                 } catch (error) {
                     appendMessage('system', 'An error occurred. Please try again.');
+                } finally {
+                    // Hide loader
+                    loader.style.display = 'none';
                 }
             }
-            }
-            // Send Message
-            sendChat.addEventListener('click', async () =>sendMessage());
-            // Event listener for Enter key
+
+            sendChat.addEventListener('click', async () => sendMessage());
+
             chatInput.addEventListener('keydown', function (event) {
                 if (event.key === 'Enter') {
-                    event.preventDefault(); // Prevent default behavior of Enter key
+                    event.preventDefault();
                     sendMessage();
                 }
             });
+
             function appendMessage(sender, message) {
                 const msgClass = sender === 'user' ? 'user' : sender === 'ai' ? 'ai' : 'system';
                 const messageElement = document.createElement('div');

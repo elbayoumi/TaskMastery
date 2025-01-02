@@ -55,9 +55,7 @@ Route::get('/send-test-email', function () {
 
     return 'Test email has been sent!';
 });
-use App\Http\Controllers\GeminiController;
 
-Route::get('/gemini/balances', [GeminiController::class, 'showBalances']);
 use App\Http\Controllers\GenerativeLanguageController;
 
 Route::post('/generate-content', [GenerativeLanguageController::class, 'generate'])->name('generate-content');
