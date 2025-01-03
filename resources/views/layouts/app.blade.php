@@ -21,7 +21,7 @@
         #chatbox {
             display: none;
             position: fixed;
-            bottom: 80px;
+            bottom: 80px; /* Default bottom position */
             right: 10px;
             width: 90%;
             max-width: 400px;
@@ -181,7 +181,7 @@
 
         @media (max-width: 768px) {
             #chatbox {
-                bottom: 10px;
+                bottom: 100px; /* Make it higher than the bottom of the page */
                 width: 95%;
                 right: 2.5%;
             }
@@ -191,7 +191,7 @@
             }
 
             #toggleChat {
-                bottom: 15px;
+                bottom: 20px;
                 right: 10px;
             }
         }
