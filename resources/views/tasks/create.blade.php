@@ -26,7 +26,7 @@
 
                         <!-- Prompt Input -->
                         <div class="mb-4">
-                            <label for="prompt" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Prompt</label>
+                            <label for="prompt" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Prompt to ai</label>
                             <div class="flex items-center">
                                 <span class="mr-2 text-gray-500 dark:text-gray-300">💡</span>
                                 <textarea name="prompt" id="prompt" rows="3" class="mt-1 block w-full border-2 border-gray-300 dark:bg-gray-700 dark:text-white dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"></textarea>
