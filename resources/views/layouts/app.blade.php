@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @if (Request::url() === url('/'))
-    <link rel="canonical" href="{{ url('/') }}">
+        <link rel="canonical" href="{{ url('/') }}">
     @endif
 
     <title>{{ config('app.name', 'TaskMastery') }} - @yield('title')</title>
@@ -21,7 +21,8 @@
         #chatbox {
             display: none;
             position: fixed;
-            bottom: 80px; /* Default bottom position */
+            bottom: 80px;
+            /* Default bottom position */
             right: 10px;
             width: 90%;
             max-width: 400px;
@@ -70,6 +71,8 @@
         }
 
         .chat-message {
+            white-space: pre-wrap;
+            /* للحفاظ على تنسيق النصوص */
             margin-bottom: 10px;
         }
 
@@ -170,7 +173,10 @@
         }
 
         @keyframes bounce {
-            0%, 80%, 100% {
+
+            0%,
+            80%,
+            100% {
                 transform: scale(0);
             }
 
@@ -181,7 +187,8 @@
 
         @media (max-width: 768px) {
             #chatbox {
-                bottom: 100px; /* Make it higher than the bottom of the page */
+                bottom: 100px;
+                /* Make it higher than the bottom of the page */
                 width: 95%;
                 right: 2.5%;
             }
@@ -231,7 +238,7 @@
     <button id="toggleChat">Chat with AI</button>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const chatbox = document.getElementById('chatbox');
             const chatMessages = document.getElementById('chatMessages');
             const chatInput = document.getElementById('chatInput');
@@ -268,7 +275,9 @@
                             'Content-Type': 'application/json',
                             'X-CSRF-TOKEN': '{{ csrf_token() }}',
                         },
-                        body: JSON.stringify({ text: userMessage }),
+                        body: JSON.stringify({
+                            text: userMessage
+                        }),
                     });
 
                     const result = await response.json();
@@ -288,7 +297,7 @@
 
             sendChat.addEventListener('click', async () => sendMessage());
 
-            chatInput.addEventListener('keydown', function (event) {
+            chatInput.addEventListener('keydown', function(event) {
                 if (event.key === 'Enter') {
                     event.preventDefault();
                     sendMessage();
@@ -299,10 +308,14 @@
                 const msgClass = sender === 'user' ? 'user' : sender === 'ai' ? 'ai' : 'system';
                 const messageElement = document.createElement('div');
                 messageElement.className = `chat-message ${msgClass}`;
-                messageElement.innerHTML = `<strong>${sender.toUpperCase()}:</strong> ${message}`;
+
+                // إضافة النص كما هو، وسيتم تنسيق الأسطر باستخدام CSS
+                messageElement.textContent = message;
+
                 chatMessages.appendChild(messageElement);
-                chatMessages.scrollTop = chatMessages.scrollHeight;
+                chatMessages.scrollTop = chatMessages.scrollHeight; // تمرير لآخر الرسائل
             }
+
         });
     </script>
 </body>
