@@ -22,8 +22,9 @@
             display: none;
             position: fixed;
             bottom: 80px;
-            right: 20px;
-            width: 350px;
+            right: 10px;
+            width: 90%;
+            max-width: 400px;
             background-color: #ffffff;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
             border-radius: 10px;
@@ -57,7 +58,8 @@
 
         #chatMessages {
             padding: 10px;
-            height: 250px;
+            height: 300px;
+            max-height: calc(100vh - 200px);
             overflow-y: auto;
             font-size: 14px;
             border-bottom: 1px solid #e2e8f0;
@@ -87,6 +89,7 @@
             padding: 10px;
             display: flex;
             align-items: center;
+            gap: 5px;
         }
 
         #chatInput {
@@ -96,6 +99,7 @@
             border-radius: 5px;
             font-size: 14px;
             outline: none;
+            min-width: 0;
         }
 
         #chatInput.dark {
@@ -108,10 +112,9 @@
             background-color: #4a90e2;
             color: #ffffff;
             border: none;
-            padding: 8px 15px;
-            margin-left: 10px;
-            border-radius: 5px;
+            padding: 8px 10px;
             font-size: 14px;
+            border-radius: 5px;
             cursor: pointer;
         }
 
@@ -122,11 +125,11 @@
         #toggleChat {
             position: fixed;
             bottom: 20px;
-            right: 20px;
+            right: 10px;
             background-color: #4a90e2;
             color: #ffffff;
             border: none;
-            padding: 10px 20px;
+            padding: 8px 15px;
             border-radius: 50px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
             font-size: 14px;
@@ -170,8 +173,26 @@
             0%, 80%, 100% {
                 transform: scale(0);
             }
+
             40% {
                 transform: scale(1);
+            }
+        }
+
+        @media (max-width: 768px) {
+            #chatbox {
+                bottom: 10px;
+                width: 95%;
+                right: 2.5%;
+            }
+
+            #chatMessages {
+                height: 250px;
+            }
+
+            #toggleChat {
+                bottom: 15px;
+                right: 10px;
             }
         }
     </style>
